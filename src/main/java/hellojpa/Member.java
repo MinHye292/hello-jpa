@@ -5,9 +5,18 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Member {
-    @jakarta.persistence.Id
+    @Id
     private Long Id;
     private String name;
+
+    public Member(){
+
+    }
+
+    public Member(Long id, String name) {
+        Id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return Id;
