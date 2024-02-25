@@ -2,8 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity
 public class Member {
     @Id @GeneratedValue
@@ -11,8 +9,18 @@ public class Member {
     private Long id;
     @Column(name = "USERNAME")
     private String username;
-    @Column(name = "TEAM_ID")
-    private Long teamId;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public Long getId() {
         return id;
@@ -28,13 +36,5 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Long getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(Long teamId) {
-        this.teamId = teamId;
     }
 }
