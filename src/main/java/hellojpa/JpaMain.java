@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 public class JpaMain {
-
     public static void main(String[] args) {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
@@ -13,12 +12,14 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            //영속
-            Member member = em.find(Member.class, 150L);
-            member.setName("AAAAA");
-            //em.persist(member);
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-            System.out.println("================================");
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeamId(team.getId());
+            em.persist(member);
 
             tx.commit();
         } catch (Exception e) {
