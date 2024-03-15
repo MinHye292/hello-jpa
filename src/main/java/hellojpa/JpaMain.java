@@ -25,13 +25,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member m = em.find(Member.class, member1.getId());
-
-            System.out.println("m = " + m.getTeam().getClass());
-
-            System.out.println("======================");
-            m.getTeam().getName(); //초기화
-            System.out.println("======================");
+            //Member m = em.find(Member.class, member1.getId());
+            List<Member> members = em.createQuery("select m from Member m", Member.class)
+                            .getResultList();
+            //SQL: select * from member;
+            //SQL: select * from team where TEAM_ID = xxx
             
             tx.commit();
         } catch (Exception e) {
